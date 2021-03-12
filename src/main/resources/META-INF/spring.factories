@@ -1,0 +1,11 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.mwy.starter.config.BaseConfig,\
+com.mwy.starter.config.KeepAliveActuatorConfig,\
+com.mwy.starter.config.ExceptionMonitorExecutorConfig,\
+com.mwy.starter.core.ExceptionMonitorPostHandler,\
+com.mwy.starter.config.FlowRuleConfig,\
+com.mwy.starter.config.QueueMonitorManagerConfig,\
+com.mwy.starter.core.ExceptionMonitorActuator,\
+com.mwy.starter.utils.BeanContext
+

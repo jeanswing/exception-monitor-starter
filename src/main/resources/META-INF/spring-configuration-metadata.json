@@ -1,0 +1,87 @@
+{
+  "groups":[
+    {
+      "name":"monitor",
+      "type":"java.lang.String"
+    }
+  ],
+  "properties":[
+    {
+      "name":"monitor.enable",
+      "type":"java.lang.Boolean",
+      "description":"是否启用(默认true)",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.sys-name",
+      "type":"java.lang.String",
+      "description":"被监控系统名称",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.server-address",
+      "type":"java.lang.String",
+      "description":"监控中心地址(不配置则默认IExceptionNotify实现接口)",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.receive-email",
+      "type":"java.lang.String",
+      "description":"消息收件人邮箱(多个用,隔开)",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.receive-wechat",
+      "type":"java.lang.String",
+      "description":"消息收件人企业微信(多个用,隔开)",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.max-queue-size",
+      "type":"java.lang.Integer",
+      "description":"消息队列最大数(默认30000)",
+      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
+    },
+    {
+      "name":"monitor.flow.enable",
+      "type":"java.lang.Boolean",
+      "description":"是否开启限流(默认false)",
+      "sourceType": "com.mwy.starter.config.FlowRuleConfigProperties"
+    },
+    {
+      "name":"monitor.flow.rule-type",
+      "type":"java.lang.String",
+      "description":"限流规则(默认total)",
+      "sourceType": "com.mwy.starter.config.FlowRuleConfigProperties"
+    },
+    {
+      "name":"monitor.flow.num",
+      "type":"java.lang.Integer",
+      "description":"限流数量(默认200)",
+      "sourceType": "com.mwy.starter.config.FlowRuleConfigProperties"
+    }
+  ],
+  "hints":[
+    {
+      "name":"monitor.flow.rule-type",
+      "values":[
+        {
+          "value":"total",
+          "description":"按照总数"
+        },
+        {
+          "value":"exception",
+          "description":"按照异常类型"
+        },
+        {
+          "value":"method",
+          "description":"按照方法类型"
+        },
+        {
+          "value":"class",
+          "description":"按照类类型"
+        }
+      ]
+    }
+  ]
+}
