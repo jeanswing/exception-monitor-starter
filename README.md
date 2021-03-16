@@ -36,7 +36,7 @@
    ````
    @GetMapping("/order/list/{id}")
    @ExceptionMonitor(ignoreExceptionName = {"classnotfoundexception","serviceException","java.lang.IllegalArgumentException"},
-               customizedInfo = "这个列表查询接口",showExceptionDetail = false,noticeEmails = {"Alibaba.Jack@miniso.com,David.Jack@tencent.com"})
+               customizedInfo = "这个列表查询接口",showExceptionDetail = false,noticeEmails = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
    public Object list(@PathVariable("id")String id){
        int i =1/0;
        return i;
@@ -53,7 +53,7 @@
         #监控中心服务地址(不配置则默认IExceptionNotify实现接口)
         server-address: http://172.18.253.4:6699
         #获取提示邮件地址，多个使用英文逗号隔开
-        receive-email: wuying.ma@miniso.com,Java.ma@miniso.com
+        receive-email: wuying.ma@qq.com,Java.ma@qq.com
         #企业微信Id，多个使用英文逗号隔开
         receive-wechat: Jack Ma,Jdk Ma
         #最大任务数，默认30000(当monitor端网络问题无法连接时，避免任务队列内存OOM，进行限制)
