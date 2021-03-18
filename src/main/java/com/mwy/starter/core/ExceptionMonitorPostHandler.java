@@ -33,14 +33,14 @@ public class ExceptionMonitorPostHandler {
     ExceptionMonitorExecutor exceptionMonitorExecutor;
 
     public void handleException(ExchangeMessage message){
-        message.setWechat(BaseConfigProperties.getReceiveWechat()).setSysName(BaseConfigProperties.getSysName());
-        String email = message.getEmail();
-        if(StringUtils.isBlank(email)){
-            message.setEmail(BaseConfigProperties.getReceiveEmail());
+        message.setSysName(BaseConfigProperties.getSysName());
+        String receiveUser = message.getReceiveUser();
+        if(StringUtils.isBlank(receiveUser)){
+            message.setReceiveUser(BaseConfigProperties.getReceiveUser());
         }
         ExceptionProvider provider = new ExceptionProvider(message,exceptionMonitorExecutor.getQueue());
         //无配置过滤
-        if(StringUtils.isBlank(message.getEmail())){
+        if(StringUtils.isBlank(message.getReceiveUser())){
             return;
         }
         ThreadPoolExecutor providerPool = exceptionMonitorExecutor.getProvidePool();

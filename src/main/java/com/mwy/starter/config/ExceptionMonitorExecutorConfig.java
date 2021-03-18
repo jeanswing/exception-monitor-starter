@@ -38,7 +38,7 @@ public class ExceptionMonitorExecutorConfig {
                 new ThreadPoolExecutor.AbortPolicy()//任务拒绝策略
         );
         providePool.prestartAllCoreThreads();//预启动所有核心线程
-        log.warn("(exception-catch)Initializing ThreadPool:  [ProviderThreadPool] start......");
+        log.warn("(exception-monitor)Initializing ThreadPool:  [ProviderThreadPool] start......");
         exceptionMonitorExecutor.setProvidePool(providePool);
 
         ThreadPoolExecutor consumePool = new ThreadPoolExecutor(// 自定义一个线程池
@@ -51,7 +51,7 @@ public class ExceptionMonitorExecutorConfig {
                 new ThreadPoolExecutor.AbortPolicy()//任务拒绝策略
         );
         consumePool.prestartAllCoreThreads();//预启动所有核心线程
-        log.warn("(exception-catch)Initializing ThreadPool:  [ConsumerThreadPool] start......");
+        log.warn("(exception-monitor)Initializing ThreadPool:  [ConsumerThreadPool] start......");
         exceptionMonitorExecutor.setConsumePool(consumePool);
         //初始化启动消费者任务
         //consumePool.execute(new ExceptionConsumer(queue));

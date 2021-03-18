@@ -1,7 +1,7 @@
 package com.mwy.starter.model;
 
 import lombok.Data;
-
+import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,13 +11,14 @@ import java.util.List;
  * @date 2021-01-18
  **/
 @Data
+@Accessors(chain = true)
 public class ExceptionMonitorAnnotationModel implements Serializable {
 
-    private String customizedInfo;
+    private String custom;
 
-    private Boolean showExceptionDetail;
+    private Boolean expandExcDetail;
 
-    private List<String> ignoreExceptionName;
+    private List<String> ignoreExc;
 
-    private String noticeEmails;
+    private String notifyUsers;
 }

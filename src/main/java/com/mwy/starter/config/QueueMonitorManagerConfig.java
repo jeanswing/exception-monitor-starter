@@ -36,7 +36,7 @@ public class QueueMonitorManagerConfig {
 
     @Bean
     public void queueMonitorThreadCreate(){
-        log.warn("(exception-catch)Initializing QueueMonitorManagerThread:  [QueueMonitorManagerThread] start......");
+        log.warn("(exception-monitor)Initializing QueueMonitorManagerThread:  [QueueMonitorManagerThread] start......");
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(()->{
             LinkedBlockingQueue<ExchangeMessage> queue = exceptionMonitorExecutor.queue;
             int queueSize = queue.size();
@@ -57,7 +57,7 @@ public class QueueMonitorManagerConfig {
                 }
             }else{
                 //任务超长，开启自我保护模式
-                log.info("(exception-catch)the task queue is out of range, start self-protection...");
+                log.info("(exception-monitor)the task queue is out of range, start self-protection...");
                 if(!exceptionMonitorExecutor.providePool.isShutdown()){
                     exceptionMonitorExecutor.providePool.shutdown();
                 }

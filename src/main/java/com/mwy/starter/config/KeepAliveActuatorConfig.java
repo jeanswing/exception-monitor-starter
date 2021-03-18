@@ -34,10 +34,10 @@ public class KeepAliveActuatorConfig {
 
     @Bean
     public void keepAlive(){
-        log.warn("(exception-catch)Initializing KeepAliveThread:  [KeepAliveThread] start......");
+        log.warn("(exception-monitor)Initializing KeepAliveThread:  [KeepAliveThread] start......");
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(()->{
             alive = HttpClientUtil.connectForGet(configProperties.getServerAddress()+configProperties.getKeepAliveTest());
-            log.info("(exception-catch) keep alive:{}",alive?"connected":"unconnected");
+            log.info("(exception-monitor) keep alive:{}",alive?"connected":"unconnected");
         }, 5, 3, TimeUnit.SECONDS);
     }
 }

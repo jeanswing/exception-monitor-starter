@@ -27,7 +27,7 @@ public class FlowRulePostHandler {
     public ExchangeMessage ruleHandler(ExchangeMessage message){
 
         FlowRuleEnum ruleType = ruleConfigProperties.getRuleType();
-        List<String> emails = Arrays.asList(message.getEmail().split(","));
+        List<String> receiveUsers = Arrays.asList(message.getReceiveUser().split(","));
         String ruleKey = null;//默认total类型
         Integer num = ruleConfigProperties.getNum();
         switch (ruleType){
@@ -38,19 +38,19 @@ public class FlowRulePostHandler {
         }
         //过滤规则
         if(ruleMap != null){
-            if(CollectionUtil.isNotEmpty(emails)){
+            if(CollectionUtil.isNotEmpty(receiveUsers)){
                 StringBuilder esb = new StringBuilder();
-                for (String email : emails) {
-                    String key = ruleKey+email;
+                for (String receiveUser : receiveUsers) {
+                    String key = ruleKey+receiveUser;
                     Integer keyCounter = ruleMap.get(key);
                     if(keyCounter==null) keyCounter=0;
                     if(keyCounter<num){
                         ruleMap.put(key,++keyCounter);
-                        esb.append(email).append(",");
+                        esb.append(receiveUser).append(",");
                     }
                 }
                 String lastEmail = esb.toString();
-                message.setEmail(StringUtils.isBlank(lastEmail)?null:lastEmail.substring(0,lastEmail.length()-1));
+                message.setReceiveUser(StringUtils.isBlank(lastEmail)?null:lastEmail.substring(0,lastEmail.length()-1));
             }
         }
         return message;

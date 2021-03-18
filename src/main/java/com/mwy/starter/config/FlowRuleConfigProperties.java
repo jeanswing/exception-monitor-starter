@@ -21,6 +21,6 @@ public class FlowRuleConfigProperties {
     //total 按照邮件总数量
     private FlowRuleEnum ruleType = FlowRuleEnum.Total;
 
-    //邮件数量
+    //通知数量
     private Integer num = 200;
 }

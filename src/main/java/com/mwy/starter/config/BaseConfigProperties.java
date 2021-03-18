@@ -18,10 +18,8 @@ public class BaseConfigProperties {
     private String sysName;
     //监控中心地址
     private String serverAddress;
-    //消息收件人邮箱
-    private String receiveEmail;
-    //消息收件人微信
-    private String receiveWechat;
+    //消息接收人唯一标识
+    private String receiveUser;
     //默认最大队列
     private Integer maxQueueSize = 30000;
 

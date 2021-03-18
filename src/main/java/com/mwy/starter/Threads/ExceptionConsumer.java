@@ -34,7 +34,7 @@ public class ExceptionConsumer implements Runnable {
             try {
                 if(queue!=null && !queue.isEmpty()){
                     /*if(!KeepAliveActuatorConfig.alive){
-                        log.error("(exception-catch)can not connect to [Monitor Server Centre]......");
+                        log.error("(exception-monitor)can not connect to [Monitor Server Centre]......");
                         return;
                     }*/
                     ExchangeMessage message = queue.take();
@@ -44,17 +44,17 @@ public class ExceptionConsumer implements Runnable {
                         FlowRulePostHandler flowRulePostHandler = BeanContext.getBean(FlowRulePostHandler.class);
                         message = flowRulePostHandler.ruleHandler(message);
                     }
-                    log.info("消费者消费信息开始,{}",JSON.toJSONString(message));
-                    if(message!=null && StringUtils.isNotBlank(message.getEmail())){
+                    log.info("consumer take a task");
+                    if(message!=null && StringUtils.isNotBlank(message.getReceiveUser())){
                         exchangeMessage(message);
                     }
                 }
             } catch (InterruptedException e) {
-                log.error("(exception-catch)Exception Monitor consumer invoke error->InterruptedException:"+e.getMessage());
+                log.error("(exception-monitor)Exception Monitor consumer invoke error->InterruptedException:"+e.getMessage());
             } catch (Exception e){
                 //优化点：如有必要，基于消费失败的补偿措施，重新put会陷入死循环
                 e.printStackTrace();
-                log.info("(exception-catch)Exception Monitor consumer invoke error->Exception:"+e.getMessage());
+                log.info("(exception-monitor)Exception Monitor consumer invoke error->Exception:"+e.getMessage());
             }
         }
     }
@@ -70,9 +70,9 @@ public class ExceptionConsumer implements Runnable {
             }
         }else{
             String url = configProperties.getServerAddress()+configProperties.getPushCreate();
-            log.info("(exception-catch)request url:{}",url);
+            log.info("(exception-monitor)request url:{}",url);
             String resp = HttpClientUtil.doPostJson(url,JSON.toJSONString(message));
-            log.info("(exception-catch)response json:{}",JSON.toJSONString(resp));
+            log.info("(exception-monitor)response json:{}",JSON.toJSONString(resp));
         }
     }
 }

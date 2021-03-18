@@ -40,7 +40,7 @@ public class FlowRuleConfig {
 
         Integer num = flowRuleConfigProperties.getNum();
         if(num==null || num<=0){
-            log.warn("(exception-catch)config [monitor.flow.num] is unavailable，set it 300 default");
+            log.warn("(exception-monitor)config [monitor.flow.num] is unavailable，set it 300 default");
             flowRuleConfigProperties.setNum(300);
         }
 

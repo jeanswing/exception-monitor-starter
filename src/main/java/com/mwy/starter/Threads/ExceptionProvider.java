@@ -28,7 +28,7 @@ public class ExceptionProvider implements Runnable {
         try {
             queue.put(message);
         } catch (InterruptedException e) {
-            log.error("(exception-catch)Exception Monitor provider invoke error->InterruptedException:"+e.getMessage());
+            log.error("(exception-monitor)Exception Monitor provider invoke error->InterruptedException:"+e.getMessage());
         }
     }
 }

@@ -20,5 +20,5 @@ import org.springframework.context.annotation.Configuration;
 public class BaseConfig {
 
     @Bean
-    public void initBaseConfig(){ log.warn("Initialized [exception-catch-stater] base config successfully,start initialize all other configs..."); }
+    public void initBaseConfig(){ log.warn("Initialized [exception-monitor] base config successfully,start initialize all other configs..."); }
 }

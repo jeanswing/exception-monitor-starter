@@ -25,15 +25,9 @@
       "sourceType": "com.mwy.starter.config.BaseConfigProperties"
     },
     {
-      "name":"monitor.receive-email",
+      "name":"monitor.receive-user",
       "type":"java.lang.String",
-      "description":"消息收件人邮箱(多个用,隔开)",
-      "sourceType": "com.mwy.starter.config.BaseConfigProperties"
-    },
-    {
-      "name":"monitor.receive-wechat",
-      "type":"java.lang.String",
-      "description":"消息收件人企业微信(多个用,隔开)",
+      "description":"消息接收人标识(多个使用,隔开)",
       "sourceType": "com.mwy.starter.config.BaseConfigProperties"
     },
     {

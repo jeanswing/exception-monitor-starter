@@ -20,23 +20,24 @@
       * 2.1.4、使用monitor中心模式时，C端默认与monitor端保持心跳测试，当心跳正常时才会尝试发送任务，发送失败的任务，会默认进行三次重试。
    * 2.2、通知限流，用户自定义配置通知限制规则:<br/>
       * 2.2.1、total  基于总通知量限流，同一个通知Id(如邮箱)的总量达到阈值，24h后才会接收新的通知。<br/>
-      * 2.2.2、exception  基于异常类型限流，同一个通知Id(如邮箱)的同一个异常类型达到阈值，24h后才会接收新的通知。<br/>
-      * 2.2.3、method  基于方法类型限流，同一个通知Id(如邮箱)的相同方法所产生异常达到阈值，24h才会接收新的通知。<br/>
-      * 2.2.4、class  基于类类型限流，同一个通知Id(如邮箱)的相同类中所产生异常达到阈值，24h才会接收新的通知。<br/>
+      * 2.2.2、exception  基于异常类型限流，同一个通知Id的同一个异常类型达到阈值，24h后才会接收新的通知。<br/>
+      * 2.2.3、method  基于方法类型限流，同一个通知Id的相同方法所产生异常达到阈值，24h才会接收新的通知。<br/>
+      * 2.2.4、class  基于类类型限流，同一个通知Id的相同类中所产生异常达到阈值，24h才会接收新的通知。<br/>
    
 ## 3、使用核心注解: @ExceptionMonitor
    * 注解提供继承性，建议不要使用在baseService,baseController等基础base类上，建议放在具体接口service、方法、baseMapper上。
    * 注解参数: <br/>
-     showExceptionDetail    是否提供异常更详情信息(包含所有异常)，默认true。<br/>
-     ignoreExceptionName    需要忽略的异常类名,支持类名称简写和全路径名称(默认忽略大小写)。<br/>
-     customizedInfo         自定义定制化信息,便于定位或者特殊标出。<br/>
-     noticeEmails           异常邮件提示地址，多个使用英文逗号隔开，优先级高于全局系统配置。<br/>
+     expandExcDetail    是否展开所有异常信息,默认true。<br/>
+     ignoreExc          忽略的异常名,支持类名简写和全写,忽略大小写。<br/>
+     custom             定制化信息,便于区分重要性和标识特殊性。<br/>
+     notifyUsers        通知到的用户唯一标识(如邮件、企业微信等)，优先级高于全局系统配置(不配置默认使用全局)。<br/>
+           
 ## 4、使用示例:
    * java:
    ````
    @GetMapping("/order/list/{id}")
-   @ExceptionMonitor(ignoreExceptionName = {"classnotfoundexception","serviceException","java.lang.IllegalArgumentException"},
-               customizedInfo = "这个列表查询接口",showExceptionDetail = false,noticeEmails = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
+   @ExceptionMonitor(ignoreExc = {"classnotfoundexception","serviceException","java.lang.IllegalArgumentException"},
+               custom = "这个列表查询接口",expandExcDetail = false,notifyUsers = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
    public Object list(@PathVariable("id")String id){
        int i =1/0;
        return i;
@@ -52,10 +53,8 @@
         system-name: scm
         #监控中心服务地址(不配置则默认IExceptionNotify实现接口)
         server-address: http://172.18.253.4:6699
-        #获取提示邮件地址，多个使用英文逗号隔开
-        receive-email: wuying.ma@qq.com,Java.ma@qq.com
-        #企业微信Id，多个使用英文逗号隔开
-        receive-wechat: Jack Ma,Jdk Ma
+        #通知的用户唯一标识(多个使用,隔开)
+        receive-user: wuying.ma@qq.com,Java.ma@qq.com,xxxx-userId
         #最大任务数，默认30000(当monitor端网络问题无法连接时，避免任务队列内存OOM，进行限制)
         max-queue-size: 50000
         flow:
