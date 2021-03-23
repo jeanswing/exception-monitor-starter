@@ -35,12 +35,28 @@
 ## 4、使用示例:
    * java:
    ````
-   @GetMapping("/order/list/{id}")
+   @GetMapping("/order/detail/{id}")
    @ExceptionMonitor(ignoreExc = {"classnotfoundexception","serviceException","java.lang.IllegalArgumentException"},
-               custom = "这个列表查询接口",expandExcDetail = false,notifyUsers = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
+               custom = "订单详情接口",expandExcDetail = false,notifyUsers = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
    public Object list(@PathVariable("id")String id){
        int i =1/0;
        return i;
+   }
+   ````
+   
+   * java:
+   ````
+   @RestController
+   @RequestMapping(value = "/order",produces = {"application/json;charset=UTF-8"})
+   @ExceptionMonitor(ignoreExc = {"classnotfoundexception","serviceException","java.lang.IllegalArgumentException"},
+                  custom = "订单处理Controller",expandExcDetail = false,notifyUsers = {"Alibaba.Jack@qq.com,David.Jack@tencent.com"})
+   public class OrderController {
+      
+        @GetMapping("/detail/{id}")
+        public Object list(@PathVariable("id")String id){
+             int i =1/0;
+             return i;
+        }
    }
    ````
    
@@ -51,18 +67,18 @@
         enable: true
         #当前系统名称(用于提示区分不同系统)
         system-name: scm
-        #监控中心服务地址(不配置则默认IExceptionNotify实现接口)
+        #监控中心服务地址
         server-address: http://172.18.253.4:6699
         #通知的用户唯一标识(多个使用,隔开)
         receive-user: wuying.ma@qq.com,Java.ma@qq.com,xxxx-userId
         #最大任务数，默认30000(当monitor端网络问题无法连接时，避免任务队列内存OOM，进行限制)
-        max-queue-size: 50000
+        max-queue-size: 20000
         flow:
             #是否开启通知限流
             enable: true
-            #限流规则
+            #限流规则类型
             ruleType: total
-            #限流邮件数量
+            #限流通知数量
             num: 200
    ```` 
    
