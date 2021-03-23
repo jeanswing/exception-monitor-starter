@@ -30,7 +30,7 @@ public class KeepAliveActuatorConfig {
     BaseConfigProperties configProperties;
 
     //心跳测试是否可用
-    public static boolean alive = false;
+    public static volatile boolean alive = false;
 
     @Bean
     public void keepAlive(){

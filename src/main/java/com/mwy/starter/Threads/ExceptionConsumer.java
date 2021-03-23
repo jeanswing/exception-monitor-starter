@@ -3,6 +3,7 @@ package com.mwy.starter.Threads;
 import com.alibaba.fastjson.JSON;
 import com.mwy.starter.config.BaseConfigProperties;
 import com.mwy.starter.config.FlowRuleConfigProperties;
+import com.mwy.starter.config.KeepAliveActuatorConfig;
 import com.mwy.starter.core.FlowRulePostHandler;
 import com.mwy.starter.interfaces.IExceptionNotify;
 import com.mwy.starter.model.ExchangeMessage;
@@ -30,13 +31,9 @@ public class ExceptionConsumer implements Runnable {
 
     @Override
     public void run() {
-        while (true){
+        for (;;){
             try {
                 if(queue!=null && !queue.isEmpty()){
-                    /*if(!KeepAliveActuatorConfig.alive){
-                        log.error("(exception-monitor)can not connect to [Monitor Server Centre]......");
-                        return;
-                    }*/
                     ExchangeMessage message = queue.take();
                     //过滤规则
                     FlowRuleConfigProperties ruleConfigProperties = BeanContext.getBean(FlowRuleConfigProperties.class);
@@ -63,16 +60,18 @@ public class ExceptionConsumer implements Runnable {
         BaseConfigProperties configProperties = BeanContext.getBean(BaseConfigProperties.class);
         //获取RestTemplate
         if(StringUtils.isBlank(configProperties.getServerAddress())){
-            IExceptionNotify notifyImpl = BeanContext.getBean(IExceptionNotify.class);
-            if(notifyImpl!=null){
-                notifyImpl.expsCollect(message);
-                notifyImpl.expsNotify(message);
+            IExceptionNotify iExceptionNotify = BeanContext.getBean(IExceptionNotify.class);
+            if(iExceptionNotify!=null){
+                iExceptionNotify.expsCollect(message);
+                iExceptionNotify.expsNotify(message);
             }
         }else{
-            String url = configProperties.getServerAddress()+configProperties.getPushCreate();
-            log.info("(exception-monitor)request url:{}",url);
-            String resp = HttpClientUtil.doPostJson(url,JSON.toJSONString(message));
-            log.info("(exception-monitor)response json:{}",JSON.toJSONString(resp));
+            if(KeepAliveActuatorConfig.alive){
+                String url = configProperties.getServerAddress()+configProperties.getPushCreate();
+                log.info("(exception-monitor)request url:{}",url);
+                String resp = HttpClientUtil.doPostJson(url,JSON.toJSONString(message));
+                log.info("(exception-monitor)response json:{}",JSON.toJSONString(resp));
+            }
         }
     }
 }

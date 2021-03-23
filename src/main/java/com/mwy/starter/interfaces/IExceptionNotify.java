@@ -3,7 +3,7 @@ package com.mwy.starter.interfaces;
 import com.mwy.starter.model.ExchangeMessage;
 
 /**
- * @author MaWuYing
+ * @author Jack Ma
  * @desc
  * @date 2021-03-08
  **/
