@@ -42,10 +42,10 @@ public class ConfigRefreshListener extends AbstractConfigRefreshListener{
     public void eventPublish(Map<String, Object> params) {}
 
     private void handleProperty(String key,Object val,Object obj) {
-        Field[] fields = obj.getClass().getFields();
+        Field[] fields = obj.getClass().getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
-            if(field.getName().toLowerCase().equals(key)){
+            if(field!=null && field.getName().toLowerCase().equals(key)){
                 ReflectUtil.setFieldValue(obj,field,val);
             }
         }
