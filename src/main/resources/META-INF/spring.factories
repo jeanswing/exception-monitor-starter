@@ -7,5 +7,6 @@ com.mwy.starter.core.ExceptionMonitorPostHandler,\
 com.mwy.starter.config.FlowRuleConfig,\
 com.mwy.starter.config.QueueMonitorManagerConfig,\
 com.mwy.starter.core.ExceptionMonitorActuator,\
-com.mwy.starter.utils.BeanContext
+com.mwy.starter.utils.BeanContext,\
+com.mwy.starter.core.ConfigRefreshListener
 
