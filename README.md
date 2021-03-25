@@ -1,7 +1,7 @@
 #Exception-Monitor(1.0.0-release初版)
 
 ## 1、功能介绍: 
-   * exception-monitor-starter用于在基于java开发的系统中捕捉异常信息数据(支持集群和微服务，不支持持久化)，用于统计和实时通知。
+   * exception-monitor-starter用于在基于java开发的系统中采集异常信息数据，支持单体和集群微服务，支持任何类型配置中心的动态刷新，不支持持久化，主要用于对异常的统计和实时通知。
    * 模式介绍:
    
      中心模式: 配置server-address即为启用，保持与S端心跳测试，以队列方式向S端产生异常数据，S端有基础收集和通知功能，基于database
