@@ -1,5 +1,6 @@
 package com.mwy.starter.core;
 
+import cn.hutool.core.util.ReflectUtil;
 import com.mwy.starter.config.BaseConfigProperties;
 import com.mwy.starter.config.FlowRuleConfigProperties;
 import com.mwy.starter.utils.StringUtils;
@@ -40,14 +41,12 @@ public class ConfigRefreshListener extends AbstractConfigRefreshListener{
     @Override
     public void eventPublish(Map<String, Object> params) {}
 
-
-    private void handleProperty(String key,Object val,Object obj) throws IllegalAccessException {
+    private void handleProperty(String key,Object val,Object obj) {
         Field[] fields = obj.getClass().getFields();
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
             if(field.getName().toLowerCase().equals(key)){
-                field.setAccessible(true);
-                field.set(obj, val);
+                ReflectUtil.setFieldValue(obj,field,val);
             }
         }
     }
