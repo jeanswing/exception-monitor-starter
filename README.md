@@ -33,7 +33,9 @@ Client使用端代码，Server端涉及到公司定制化不便开源，但不�
       * 2.2.2、exception  基于异常类型限流，同一个通知Id的同一个异常类型达到阈值，24h后才会接收新的通知。<br/>
       * 2.2.3、method  基于方法类型限流，同一个通知Id的相同方法所产生异常达到阈值，24h才会接收新的通知。<br/>
       * 2.2.4、class  基于类类型限流，同一个通知Id的相同类中所产生异常达到阈值，24h才会接收新的通知。<br/>
-   * 2.3、动态配置，考虑到不同应用场景和使用不同的配置中心中间件，自己实现配置刷新，系统提供了接口IMonitorEventListener，用户只需在change事件调用接口方法即可，系统提供默认的全注册事件执行，用户可选。
+   * 2.3、动态配置，考虑到不同应用场景和使用不同的配置中心中间件，系统提供了接口IMonitorEventListener和基础实现，用户也可以自定义实现，用户只需在配置中心的Change事件调用接口方法即可。
+      * 2.3.1、用户注入ConfigRefreshListener，调用eventPublish，即只执行配置刷新功能。
+      * 2.3.1、用户注入ConfigRefreshListener，调用configRefreshEventRegisterPublishAll，即执行所有注册实现。
 ## 3、使用核心注解: @ExceptionMonitor
    * 注解提供继承性，建议不要使用在baseService,baseController等基础base类上，建议放在具体接口service、方法、baseMapper上。
    * 注解参数: <br/>
