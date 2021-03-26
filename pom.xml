@@ -11,6 +11,17 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <url>https://github.com/jeanswing/exception-monitor-starter</url>
+    <inceptionYear>2021</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>jeanswing</id>
+            <name>马武营</name>
+            <email>738876820@qq.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,6 +53,8 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+
 
     <build>
         <plugins>
