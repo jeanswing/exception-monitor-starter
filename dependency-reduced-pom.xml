@@ -4,6 +4,15 @@
   <groupId>com.mwy</groupId>
   <artifactId>exception-monitor-starter</artifactId>
   <version>1.0.0-release</version>
+  <url>https://github.com/jeanswing/exception-monitor-starter</url>
+  <inceptionYear>2021</inceptionYear>
+  <developers>
+    <developer>
+      <id>jeanswing</id>
+      <name>马武营</name>
+      <email>738876820@qq.com</email>
+    </developer>
+  </developers>
   <build>
     <plugins>
       <plugin>
