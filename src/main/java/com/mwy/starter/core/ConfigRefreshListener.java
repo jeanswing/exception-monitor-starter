@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 import java.util.Map;
+import static com.mwy.starter.utils.Constants.Default_Config_Flow_Prefix;
+import static com.mwy.starter.utils.Constants.Default_Config_Prefix;
+import static com.mwy.starter.utils.Constants.Dot;
 
 /**
  * @author Jack Ma
@@ -24,8 +27,8 @@ public class ConfigRefreshListener extends AbstractConfigRefreshListener{
 
     @Override
     public void eventPublish(String key, Object value) {
-        if(StringUtils.isBlank(key) || !key.startsWith("monitor.")) return;
-        boolean isFlow = key.startsWith("monitor.flow.");
+        if(StringUtils.isBlank(key) || !key.startsWith(Default_Config_Prefix+Dot)) return;
+        boolean isFlow = key.startsWith(Default_Config_Flow_Prefix+Dot);
         key = this.dealHumpKey(key,isFlow);
         try {
             if(isFlow){
@@ -53,9 +56,9 @@ public class ConfigRefreshListener extends AbstractConfigRefreshListener{
 
     private String dealHumpKey(String key,boolean isFlow){
         if(isFlow){
-            key = key.split("monitor.flow.")[1].replace("-","");
+            key = key.split(Default_Config_Flow_Prefix+Dot)[1].replace("-","");
         }else{
-            key = key.split("monitor.")[1].replace("-","");
+            key = key.split(Default_Config_Prefix+Dot)[1].replace("-","");
         }
         return key.toLowerCase();
     }

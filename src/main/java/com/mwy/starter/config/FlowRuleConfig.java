@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import static com.mwy.starter.utils.Constants.Default_Flow_Map_Size;
 
 /**
  * @author Jack Ma
@@ -35,7 +36,7 @@ public class FlowRuleConfig {
     public FlowRulePostHandler flowRuleHandler(){
         FlowRulePostHandler flowRule = new FlowRulePostHandler();
         if(flowRuleConfigProperties.isEnable()){
-            flowRule.setRuleMap(new ConcurrentHashMap<>(30000));
+            flowRule.setRuleMap(new ConcurrentHashMap<>(Default_Flow_Map_Size));
         }
 
         Integer num = flowRuleConfigProperties.getNum();
@@ -46,7 +47,7 @@ public class FlowRuleConfig {
 
         Executors.newSingleThreadScheduledExecutor().schedule(()->{
             if(flowRule!=null){
-                flowRule.setRuleMap(new ConcurrentHashMap<>(30000));
+                flowRule.setRuleMap(new ConcurrentHashMap<>(Default_Flow_Map_Size));
             }
         }, 24, TimeUnit.HOURS);
         return flowRule;
