@@ -78,7 +78,7 @@ Client使用端代码，Server端涉及到公司定制化不便开源，但不�
         #是否开启异常捕获内容
         enable: true
         #当前系统名称(用于提示区分不同系统)
-        system-name: scm
+        sys-name: scm
         #监控中心服务地址
         server-address: http://127.0.0.1:6699
         #通知的用户唯一标识(多个使用,隔开)
